@@ -3,13 +3,18 @@ window.onload = function (){
 
     // Declair variables.
     let specialNames =["random", "trending"]
-    let searchNames = ["random", "Dune", "Klaus Nomi"]
+    let searchNames = ["Dune", "Klaus Nomi"]
     let gifButton;
 
     let buttonArea = document.getElementById("button-area");
     let allButton = document.getElementsByTagName("button");
     let gifArea = document.getElementById("gif-area");
     let articleArea = document.getElementById("article-area");
+    let currentTitle;
+    let spCurrentTitle;
+    let currentGif;
+    let result;
+    let newDiv;
     
 
 
@@ -23,6 +28,7 @@ window.onload = function (){
     let SpecialMaker = function(){
         for (let i = 0; i < specialNames.length; i++){
             gifButton = document.createElement("button");
+            gifButton.setAttribute("gif-id", "special");
             gifButton.setAttribute("special-gif-id", specialNames[i]);
             gifButton.textContent = (specialNames[i])
             buttonArea.appendChild(gifButton);
@@ -43,6 +49,36 @@ window.onload = function (){
     };
     btnMaker();
     console.log(`number of buttons: ${allButton.length}`);
+
+    for (i = 0; i < allButton.length; i++){
+        console.log("for loop")
+        allButton[i].addEventListener("click",function(){
+            console.log("button clicked")
+            currentTitle = this.getAttribute("gif-id");
+            if(currentTitle === "special" ){
+                spcurrentTitle =this.getAttribute("special-gif-id");
+                console.log(spCurrentTitle)
+                let queryURL = `https://api.giphy.com/v1/gifs/${spCurrentTitle}?api_key=r979ShgE7Av2VCM8iqG8IC87X6IZ9vmr&limit=10&rating=G`
+            }
+            else{
+                queryURL = `https://api.giphy.com/v1/gifs/search?api_key=r979ShgE7Av2VCM8iqG8IC87X6IZ9vmr&q=${currentTitle}&limit=10&offset=0&rating=G&lang=en`
+            }
+
+            fetch(queryURL).then(function(response){
+                return response.json()
+            }).then(function(res){
+                console.log(res)
+                result = res.data;
+                for( i = 0; i < result.length; i++){
+                    newDiv;
+                }
+            })
+
+
+
+        })
+    }
+    
     // Import GIFY api.
 
     // the fallowing insider of an on click function.
@@ -51,6 +87,10 @@ window.onload = function (){
     // add button to add it to favorite box.
 
     // bonus
+
+    // add rating buttons G PG PG-13 R
+
+    // pause and start on click
 
     // build area for favorite gifs
 
