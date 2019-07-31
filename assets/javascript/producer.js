@@ -63,16 +63,17 @@ window.onload = function (){
         console.log("for loop")
         allButton[i].addEventListener("click",function(){
             gifArea.innerHTML = " ";
+            gifCount = 0;
+            queryURL = " ";
             console.log("button clicked")
             currentTitle = this.getAttribute("gif-id");
-            // if(currentTitle === "special" ){
-            //     spcurrentTitle =this.getAttribute("special-gif-id");
-            //     console.log(spCurrentTitle)
-            //     let queryURL = `https://api.giphy.com/v1/gifs/${spCurrentTitle}?api_key=r979ShgE7Av2VCM8iqG8IC87X6IZ9vmr&limit=10&rating=G`
-            // }
-            // else{
-                queryURL = `https://api.giphy.com/v1/gifs/search?api_key=r979ShgE7Av2VCM8iqG8IC87X6IZ9vmr&q=${currentTitle}&limit=10&offset=0&rating=G&lang=en`
-            // }
+            if(currentTitle === "trending" || currentTitle === "random" ){
+                console.log(currentTitle)
+                let queryURL = `https://api.giphy.com/v1/gifs/${currentTitle}?api_key=${GIFKEY}&limit=10&rating=G`
+            }
+            else{
+                queryURL = `https://api.giphy.com/v1/gifs/search?api_key=${GIFKEY}&q=${currentTitle}&limit=10&offset=0&rating=G&lang=en`
+            }
 
             fetch(queryURL).then(function(response){
                 return response.json()
@@ -80,32 +81,33 @@ window.onload = function (){
                 console.log(res)
                 result = res.data;
                 for( i = 0; i < result.length; i++){
-                    if(gifCount === 0){
-                        newDivBox =  document.createElement("div");
-                        newDivBox.setAttribute("id", `gif-box-0`);
-                        gifArea.appendChild(newDivBox);
-                        divBox0 = document.getElementById("gif-box-0")
-
-                    }
-                    else if(gifCount === 5){
-                        newDivBox =  document.createElement("div");
-                        newDivBox.setAttribute("id", `gif-box-5`);
-                        gifArea.appendChild(newDivBox);
-                        divBox5 = document.getElementById("gif-box-5")
-                    }
+                    
                     currentGif = result[i].images.fixed_height.url;
                     newDiv = document.createElement("div");
                     newGif = document.createElement("img");
                     newGif.setAttribute("src", currentGif);
                     newDiv.appendChild(newGif);
 
+                    if(gifCount === 0){
+                        newDivBox =  document.createElement("div");
+                        newDivBox.setAttribute("id", `gif-box-0`);
+                        gifArea.appendChild(newDivBox);
+                    }
+                    else if(gifCount === 4){
+                        newDivBox =  document.createElement("div");
+                        newDivBox.setAttribute("id", `gif-box-5`);
+                        gifArea.appendChild(newDivBox);
+                        
+                    };
+                    divBox0 = document.getElementById("gif-box-0");
+                    divBox5 = document.getElementById("gif-box-5");
                     if (gifCount < 5){
                         divBox0.appendChild(newDiv);
                     }
                     else{
                         divBox5.appendChild(newDiv);
 
-                    }
+                    };
                     gifCount++;
                     
 
