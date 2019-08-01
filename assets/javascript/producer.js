@@ -9,6 +9,7 @@ window.onload = function (){
     let gifNum = 12;
     let currentTitle;
     let currentGif;
+    let pausedGif;
     let result;
     let newDivBox;
     let newDiv;
@@ -23,9 +24,34 @@ window.onload = function (){
     let articleArea = document.getElementById("article-area");
     let addGifBTN = document.getElementById("add-gif")
     let gifInput = document.getElementById("gif-input")
-    let gifTag = document.getElementsByTagName("img")
-    // gifInput = this.getAttribute("value");
     
+    // gifInput = this.getAttribute("value");
+       let gifPauser = function(){
+        let gifTags = document.getElementsByTagName("img");
+        console.log(`number of gif: ${gifTags.length}`)
+        for( i=0; i < gifTags.length; i++){
+
+            gifTags[i].addEventListener("click", function(){
+                console.log("GIF clicked")
+                let state = this.getAttribute("data-state");
+                let still = this.getAttribute("data-still");
+                let animate = this.getAttribute("data-animate");
+
+                if(state === "still"){
+                    console.log("still")
+                    this.setAttribute("src",animate);
+                    this.setAttribute("data-state", "animate")
+                    
+            
+                }
+                else{
+                    console.log("animate")
+                    this.setAttribute("src",still);
+                    this.setAttribute("data-state", "still")
+                };
+            })
+        }
+    }
     
 let initializSearch = function(){
 
@@ -51,12 +77,15 @@ let initializSearch = function(){
                     for( i = 0; i < result.length; i++){
                         
                         currentGif = result[i].images.fixed_height.url;
+                        pausedGif = result[i].images.fixed_height_still.url;
                         newDiv = document.createElement("div");
                         newDiv.setAttribute("class", "new-gif")
                         newGif = document.createElement("img");
-                        newGif.setAttribute("src", currentGif);
-                        newGif.setAttribute("pause-play", "pause");
-                        newGif.setAttribute("class", "gif pause");
+                        newGif.setAttribute("src", pausedGif);
+                        newGif.setAttribute("data-still", pausedGif);
+                        newGif.setAttribute("data-animate", currentGif);
+                        newGif.setAttribute("data-state", "still");
+                        newGif.setAttribute("class", "gif");
                         newDiv.appendChild(newGif);
                         if (gifCount < gifNum){
 
@@ -93,12 +122,12 @@ let initializSearch = function(){
                             gifCount++;
                         }
                     }
-                })
+                }).then(gifPauser);
             })
         }
+        
     }
-   
-
+ 
 
     // <section id="button-area"></section>
     // <section id="gif-area"></section>
@@ -128,6 +157,7 @@ let initializSearch = function(){
             gifButton.textContent = (searchNames[i]);
             buttonArea.append(gifButton);
             initializSearch();
+            gifPauser();
            
             // it works!
         }
@@ -147,21 +177,7 @@ let initializSearch = function(){
 
 
     });
-
- gifTag.addEventListener("click", function(){
-        console.log("GIF clicked")
-        let gifPauser = this.getAttribute("pause-play");
-        if(gifPauser === "pause"){
-            this.setAttribute("pause-play", "play")
-            this.setAttribute("class", "gif play")
-
-        }
-        else{
-            this.setAttribute("pause-play", "pause")
-            this.setAttribute("class", "gif pause")
-        }
-    })
-
+   
 
     
     // Import GIFY api.
