@@ -3,7 +3,7 @@ window.onload = function (){
 
     // Declair variables.
     let specialNames =["random", "trending"]
-    let searchNames = ["Dune", "Klaus Nomi"]
+    let searchNames = ["Dune", "Klaus Nomi","Iggy Pop"]
     let gifButton;
     let gifCount = 0;
     let currentTitle;
@@ -22,7 +22,9 @@ window.onload = function (){
     let allButton = document.getElementsByTagName("button");
     let gifArea = document.getElementById("gif-area");
     let articleArea = document.getElementById("article-area");
-    
+    let addGifBTN = document.getElementById("add-gif")
+    let gifInput = document.getElementById("gif-input")
+    // gifInput = this.getAttribute("value");
     
     
 
@@ -48,32 +50,42 @@ window.onload = function (){
 
     
     let btnMaker = function(){
+        // buttonArea.innerHTML("");
         for (let i = 0; i < searchNames.length; i++){
             gifButton = document.createElement("button");
             gifButton.setAttribute("gif-id", searchNames[i]);
-            gifButton.textContent = (searchNames[i])
-            buttonArea.appendChild(gifButton);
+            gifButton.textContent = (searchNames[i]);
+            buttonArea.append(gifButton);
             // it works!
         }
     };
     btnMaker();
     console.log(`number of buttons: ${allButton.length}`);
 
+    addGifBTN.addEventListener("click", function(){
+        event.preventDefault()
+        console.log(gifInput.value)
+        // gifInput.setAttribute("name", this.nodeName);
+        let newGif = gifInput.value;
+        console.log(newGif);
+        searchNames.push(newGif);
+        btnMaker();
+
+
+    });
+
+
     for (i = 0; i < allButton.length; i++){
         console.log("for loop")
         allButton[i].addEventListener("click",function(){
             gifArea.innerHTML = " ";
             gifCount = 0;
-            queryURL = " ";
+            let queryURL = " ";
             console.log("button clicked")
             currentTitle = this.getAttribute("gif-id");
-            if(currentTitle === "trending" || currentTitle === "random" ){
-                console.log(currentTitle)
-                let queryURL = `https://api.giphy.com/v1/gifs/${currentTitle}?api_key=${GIFKEY}&limit=10&rating=G`
-            }
-            else{
-                queryURL = `https://api.giphy.com/v1/gifs/search?api_key=${GIFKEY}&q=${currentTitle}&limit=10&offset=0&rating=G&lang=en`
-            }
+            
+            queryURL = `https://api.giphy.com/v1/gifs/search?api_key=${GIFKEY}&q=${currentTitle}&limit=25&offset=0&rating=G&lang=en`
+           
 
             fetch(queryURL).then(function(response){
                 return response.json()
@@ -84,6 +96,7 @@ window.onload = function (){
                     
                     currentGif = result[i].images.fixed_height.url;
                     newDiv = document.createElement("div");
+                    newDiv.setAttribute("class", "new-gif")
                     newGif = document.createElement("img");
                     newGif.setAttribute("src", currentGif);
                     newDiv.appendChild(newGif);
@@ -93,21 +106,36 @@ window.onload = function (){
                         newDivBox.setAttribute("id", `gif-box-0`);
                         gifArea.appendChild(newDivBox);
                     }
-                    else if(gifCount === 4){
+                    else if(gifCount%5 === 0){
                         newDivBox =  document.createElement("div");
-                        newDivBox.setAttribute("id", `gif-box-5`);
+                        newDivBox.setAttribute("id", `gif-box-${gifCount}`);
                         gifArea.appendChild(newDivBox);
                         
                     };
                     divBox0 = document.getElementById("gif-box-0");
                     divBox5 = document.getElementById("gif-box-5");
+                    divBox10 = document.getElementById("gif-box-10");
+                    divBox15 = document.getElementById("gif-box-15");
+                    divBox20 = document.getElementById("gif-box-20");
                     if (gifCount < 5){
                         divBox0.appendChild(newDiv);
                     }
-                    else{
+                    else if (gifCount < 10){
                         divBox5.appendChild(newDiv);
 
-                    };
+                    }
+                    else if (gifCount < 15){
+                        divBox10.appendChild(newDiv);
+
+                    }
+                    else if (gifCount < 20){
+                        divBox15.appendChild(newDiv);
+
+                    }
+                    else if (gifCount < 25){
+                        divBox20.appendChild(newDiv);
+
+                    }
                     gifCount++;
                     
 
