@@ -7,10 +7,16 @@ body{
     justify-content: space-evenly;
 }
 
-#gif-box-0, #gif-box-5, #gif-box-10, #gif-box-15, #gif-box-20{
+#gif-box-0, #gif-box-4, #gif-box-8, #gif-box-12, #gif-box-16{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
 
     
+}
+.gif-pause:active{
+
+    animation-play-state: paused;
+    
+
 }
