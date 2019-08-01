@@ -1,12 +1,12 @@
 window.onload = function (){
-    console.log("window on load check");
+    // console.log("window on load check");
 
     // Declair variables.
     let specialNames =["random", "trending"]
-    let searchNames = ["Dune", "Klaus Nomi","Iggy Pop","Tank Girl"]
+    let searchNames = ["Dune", "Klaus Nomi","Iggy Pop","Tank Girl", "Tom Waits"]
     let gifButton;
     let gifCount = 0;
-    let gifNum = 12;
+    let gifNum = 16;
     let currentTitle;
     let currentGif;
     let pausedGif;
@@ -16,7 +16,10 @@ window.onload = function (){
     let newGif;
     let divBox0;
     let divBox5;
-
+   
+    // var e = document.getElementById("elementId");
+    // var value = e.options[e.selectedIndex].value;
+    // var text = e.options[e.selectedIndex].tex
     let spButtonArea = document.getElementById("special-button-area")
     let buttonArea = document.getElementById("button-area");
     
@@ -24,28 +27,33 @@ window.onload = function (){
     let articleArea = document.getElementById("article-area");
     let addGifBTN = document.getElementById("add-gif")
     let gifInput = document.getElementById("gif-input")
-    
+
+    let numberChooser = function(){
+        let numChoice = document.getElementById("num-choice");
+        gifNum = numChoice.options[numChoice.selectedIndex].value;
+        console.log(gifNum)
+    }
     // gifInput = this.getAttribute("value");
-       let gifPauser = function(){
+    let gifPauser = function(){
         let gifTags = document.getElementsByTagName("img");
         console.log(`number of gif: ${gifTags.length}`)
         for( i=0; i < gifTags.length; i++){
 
             gifTags[i].addEventListener("click", function(){
-                console.log("GIF clicked")
+                // console.log("GIF clicked")
                 let state = this.getAttribute("data-state");
                 let still = this.getAttribute("data-still");
                 let animate = this.getAttribute("data-animate");
 
                 if(state === "still"){
-                    console.log("still")
+                    // console.log("still")
                     this.setAttribute("src",animate);
                     this.setAttribute("data-state", "animate")
                     
             
                 }
                 else{
-                    console.log("animate")
+                    // console.log("animate")
                     this.setAttribute("src",still);
                     this.setAttribute("data-state", "still")
                 };
@@ -54,25 +62,28 @@ window.onload = function (){
     }
     
 let initializSearch = function(){
+        
+        
 
 
         let allButton = document.getElementsByTagName("button");
          console.log(`number of buttons: ${allButton.length}`);
         for (i = 0; i < allButton.length; i++){
-            console.log("for loop")
+            // console.log("for loop")
             allButton[i].addEventListener("click",function(){
+                numberChooser()
                 gifArea.innerHTML = " ";
                 gifCount = 0;
                 let queryURL = " ";
-                console.log("button clicked")
+                // console.log("button clicked")
                 currentTitle = this.getAttribute("gif-id");
                 
-                queryURL = `https://api.giphy.com/v1/gifs/search?api_key=${GIFKEY}&q=${currentTitle}&limit=${gifNum}&offset=0&rating=R&lang=en`
+                queryURL = `https://api.giphy.com/v1/gifs/search?api_key=${GIFKEY}&q=${currentTitle}&limit=${gifNum}&offset=0&rating=&lang=en`
             
                 fetch(queryURL).then(function(response){
                     return response.json()
                 }).then(function(res){
-                    console.log(res)
+                    // console.log(res)
                     result = res.data;
                     for( i = 0; i < result.length; i++){
                         
@@ -100,23 +111,27 @@ let initializSearch = function(){
                                 gifArea.appendChild(newDivBox);                            
                             };
                             divBox0 = document.getElementById("gif-box-0");
-                            divBox5 = document.getElementById("gif-box-4");
-                            divBox10 = document.getElementById("gif-box-8");
-                            divBox15 = document.getElementById("gif-box-12");
-                            divBox20 = document.getElementById("gif-box-16");
+                            divBox4 = document.getElementById("gif-box-4");
+                            divBox8 = document.getElementById("gif-box-8");
+                            divBox12 = document.getElementById("gif-box-12");
+                            divBox16 = document.getElementById("gif-box-16");
+                            divBox20 = document.getElementById("gif-box-20");
                             if (gifCount < 4){
                                 divBox0.appendChild(newDiv);
                             }
                             else if (gifCount < 8){
-                                divBox5.appendChild(newDiv);
+                                divBox4.appendChild(newDiv);
                             }
                             else if (gifCount < 12){
-                                divBox10.appendChild(newDiv);
+                                divBox8.appendChild(newDiv);
                             }
                             else if (gifCount < 16){
-                                divBox15.appendChild(newDiv);
+                                divBox12.appendChild(newDiv);
                             }
                             else if (gifCount < 20){
+                                divBox16.appendChild(newDiv);
+                            }
+                            else if (gifCount < 24){
                                 divBox20.appendChild(newDiv);
                             }
                             gifCount++;
@@ -166,6 +181,7 @@ let initializSearch = function(){
    
 
     addGifBTN.addEventListener("click", function(){
+        
         event.preventDefault()
         buttonArea.innerHTML = ("");
         console.log(gifInput.value)
