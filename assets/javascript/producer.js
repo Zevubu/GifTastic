@@ -7,6 +7,7 @@ window.onload = function (){
     let gifButton;
     let gifCount = 0;
     let gifNum = 16;
+    let gifRate = ""; 
     let currentTitle;
     let currentGif;
     let pausedGif;
@@ -15,7 +16,12 @@ window.onload = function (){
     let newDiv;
     let newGif;
     let divBox0;
-    let divBox5;
+    let divBox4;
+    let divBox8;
+    let divBox12;
+    let divBox16;
+    let divBox20;
+
    
     // var e = document.getElementById("elementId");
     // var value = e.options[e.selectedIndex].value;
@@ -31,7 +37,12 @@ window.onload = function (){
     let numberChooser = function(){
         let numChoice = document.getElementById("num-choice");
         gifNum = numChoice.options[numChoice.selectedIndex].value;
-        console.log(gifNum)
+        // console.log(gifNum)
+    }
+    let ratingChooser = function(){
+        let ratingChoice = document.getElementById("rating-choice");
+        gifRate = ratingChoice.options[ratingChoice.selectedIndex].value;
+        // console.log(gifRate)
     }
     // gifInput = this.getAttribute("value");
     let gifPauser = function(){
@@ -40,20 +51,20 @@ window.onload = function (){
         for( i=0; i < gifTags.length; i++){
 
             gifTags[i].addEventListener("click", function(){
-                // console.log("GIF clicked")
+                console.log("GIF clicked")
                 let state = this.getAttribute("data-state");
                 let still = this.getAttribute("data-still");
                 let animate = this.getAttribute("data-animate");
 
                 if(state === "still"){
-                    // console.log("still")
+                    console.log("still")
                     this.setAttribute("src",animate);
                     this.setAttribute("data-state", "animate")
                     
             
                 }
                 else{
-                    // console.log("animate")
+                    console.log("animate")
                     this.setAttribute("src",still);
                     this.setAttribute("data-state", "still")
                 };
@@ -62,23 +73,20 @@ window.onload = function (){
     }
     
 let initializSearch = function(){
-        
-        
-
-
         let allButton = document.getElementsByTagName("button");
-         console.log(`number of buttons: ${allButton.length}`);
+        console.log(`number of buttons: ${allButton.length}`);
         for (i = 0; i < allButton.length; i++){
             // console.log("for loop")
             allButton[i].addEventListener("click",function(){
-                numberChooser()
+                numberChooser();
+                ratingChooser();
                 gifArea.innerHTML = " ";
                 gifCount = 0;
                 let queryURL = " ";
                 // console.log("button clicked")
                 currentTitle = this.getAttribute("gif-id");
                 
-                queryURL = `https://api.giphy.com/v1/gifs/search?api_key=${GIFKEY}&q=${currentTitle}&limit=${gifNum}&offset=0&rating=&lang=en`
+                queryURL = `https://api.giphy.com/v1/gifs/search?api_key=${GIFKEY}&q=${currentTitle}&limit=${gifNum}&offset=0&rating=${gifRate}&lang=en`
             
                 fetch(queryURL).then(function(response){
                     return response.json()
@@ -135,9 +143,11 @@ let initializSearch = function(){
                                 divBox20.appendChild(newDiv);
                             }
                             gifCount++;
+                            gifPauser();
                         }
                     }
-                }).then(gifPauser);
+                })
+                // .then(gifPauser);
             })
         }
         
@@ -165,6 +175,7 @@ let initializSearch = function(){
 
     
     let btnMaker = function(){
+
         // buttonArea.innerHTML("");
         for (let i = 0; i < searchNames.length; i++){
             gifButton = document.createElement("button");
@@ -172,8 +183,7 @@ let initializSearch = function(){
             gifButton.textContent = (searchNames[i]);
             buttonArea.append(gifButton);
             initializSearch();
-            gifPauser();
-           
+            gifPauser(); 
             // it works!
         }
     };
@@ -181,33 +191,30 @@ let initializSearch = function(){
    
 
     addGifBTN.addEventListener("click", function(){
-        
         event.preventDefault()
         buttonArea.innerHTML = ("");
         console.log(gifInput.value)
-        // gifInput.setAttribute("name", this.nodeName);
-        let newGif = gifInput.value;
+        let newGif = gifInput.value.trim();
         console.log(newGif);
         searchNames.push(newGif);
         btnMaker();
-
-
     });
    
 
     
     // Import GIFY api.
 
-    // the fallowing insider of an on click function.
-    // Run fetch function to pull api in.
-    // Build section box for each gif then apply the gif to it and then add gif info to it.
+    // X the fallowing insider of an on click function.
+    // X Run fetch function to pull api in.
+    // X Build section box for each gif then apply the gif to it and then add gif info to it.
     // add button to add it to favorite box.
 
     // bonus
 
-    // add rating buttons G PG PG-13 R
+    // X add rating buttons G PG PG-13 R
+    // X add number of gif choice.
 
-    // pause and start on click
+    // X pause and start on click
 
     // build area for favorite gifs
 
@@ -216,7 +223,7 @@ let initializSearch = function(){
 
     // build area for favorite articles
 
-    // figure out how to make horizantal scrolling sections to hold gifs and articles.
+    // X figure out how to make horizantal scrolling sections to hold gifs and articles.
 
 
 };
