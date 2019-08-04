@@ -44,39 +44,15 @@ window.onload = function (){
         gifRate = ratingChoice.options[ratingChoice.selectedIndex].value;
         // console.log(gifRate)
     }
-    // gifInput = this.getAttribute("value");
-    let gifPauser = function(){
-        let gifTags = document.getElementsByClassName("gif");
-        console.log(`number of gif: ${gifTags.length}`)
-        for( i=0; i < gifTags.length; i++){
+ 
+   
 
-            gifTags[i].addEventListener("click", function(){
-                console.log("GIF clicked")
-                let state = this.getAttribute("data-state");
-                let still = this.getAttribute("data-still");
-                let animate = this.getAttribute("data-animate");
-
-                if(state === "animate"){
-
-                    console.log("animate")
-                    this.setAttribute("src",still);
-                    this.setAttribute("data-state", "still")
-
-                }
-                else{
-                    console.log("still")
-                    this.setAttribute("src",animate);
-                    this.setAttribute("data-state", "animate")
-                };
-            })
-        }
-    }
     
 let initializSearch = function(){
         let allButton = document.getElementsByTagName("button");
         console.log(`number of buttons: ${allButton.length}`);
         for (i = 0; i < allButton.length; i++){
-            // console.log("for loop")
+            
             allButton[i].addEventListener("click",function(){
                 numberChooser();
                 ratingChooser();
@@ -104,9 +80,27 @@ let initializSearch = function(){
                         newGif.setAttribute("data-still", pausedGif);
                         newGif.setAttribute("data-animate", currentGif);
                         newGif.setAttribute("data-state", "still");
-                        newGif.setAttribute("class", "gif");
+                        newGif.setAttribute("listener", `false`);
+                        newGif.addEventListener("click", function(){
+                            console.log("GIF clicked")
+                            let state = this.getAttribute("data-state");
+                            let still = this.getAttribute("data-still");
+                            let animate = this.getAttribute("data-animate");
+
+                            if(state === "animate"){
+
+                                console.log("still")
+                                this.setAttribute("src",still);
+                                this.setAttribute("data-state", "still")
+
+                            }
+                            else{
+                                console.log("animate")
+                                this.setAttribute("src",animate);
+                                this.setAttribute("data-state", "animate")
+                            };
+                        });
                         newDiv.appendChild(newGif);
-                        
                         if (gifCount < gifNum){
 
                             if(gifCount === 0){
@@ -145,38 +139,18 @@ let initializSearch = function(){
                             else if (gifCount < 24){
                                 divBox20.appendChild(newDiv);
                             };
-                            let gifTags = document.getElementsByClassName("gif");
-                            console.log(`number of gif: ${gifTags.length}`)
-                            for( i=0; i < gifTags.length; i++){
-                                gifTags[i].addEventListener("click", function(){
-                                    console.log("GIF clicked")
-                                    let state = this.getAttribute("data-state");
-                                    let still = this.getAttribute("data-still");
-                                    let animate = this.getAttribute("data-animate");
-                                    if(state === "animate"){
-                                        console.log("animate")
-                                        this.setAttribute("src",still);
-                                        this.setAttribute("data-state", "still")
-                                                                                                                
-                                    }
-                                    else{
-                                        console.log("still")
-                                        this.setAttribute("src",animate);
-                                        this.setAttribute("data-state", "animate")
-                                    };
-                                })
-                            }
-                            gifCount++;
-                            gifPauser()
-                        }
-                    }
+                            gifCount++; 
+                            
+                        };
+                    };
                 })
-                // .then(gifPauser);
-            })
-        }
+                // .then(function() {
+                //     gifPauser()
+                // });
+            });
+        };
         
-    }
-    ;
+    };
 
     // <section id="button-area"></section>
     // <section id="gif-area"></section>
@@ -206,8 +180,7 @@ let initializSearch = function(){
             gifButton.setAttribute("gif-id", searchNames[i]);
             gifButton.textContent = (searchNames[i]);
             buttonArea.append(gifButton);
-            initializSearch();
-            gifPauser(); 
+            initializSearch(); 
             // it works!
         }
     };
@@ -222,6 +195,7 @@ let initializSearch = function(){
         console.log(newGif);
         searchNames.push(newGif);
         btnMaker();
+        // gifPauser();
     });
    
 
