@@ -46,7 +46,7 @@ window.onload = function (){
     }
     // gifInput = this.getAttribute("value");
     let gifPauser = function(){
-        let gifTags = document.getElementsByTagName("img");
+        let gifTags = document.getElementsByClassName("gif");
         console.log(`number of gif: ${gifTags.length}`)
         for( i=0; i < gifTags.length; i++){
 
@@ -56,17 +56,17 @@ window.onload = function (){
                 let still = this.getAttribute("data-still");
                 let animate = this.getAttribute("data-animate");
 
-                if(state === "still"){
-                    console.log("still")
-                    this.setAttribute("src",animate);
-                    this.setAttribute("data-state", "animate")
-                    
-            
-                }
-                else{
+                if(state === "animate"){
+
                     console.log("animate")
                     this.setAttribute("src",still);
                     this.setAttribute("data-state", "still")
+
+                }
+                else{
+                    console.log("still")
+                    this.setAttribute("src",animate);
+                    this.setAttribute("data-state", "animate")
                 };
             })
         }
@@ -106,16 +106,19 @@ let initializSearch = function(){
                         newGif.setAttribute("data-state", "still");
                         newGif.setAttribute("class", "gif");
                         newDiv.appendChild(newGif);
+                        
                         if (gifCount < gifNum){
 
                             if(gifCount === 0){
                                 newDivBox =  document.createElement("div");
                                 newDivBox.setAttribute("id", `gif-box-0`);
+                                newDivBox.setAttribute("class", `gif-box`);
                                 gifArea.appendChild(newDivBox);
                             }
                             else if(gifCount%4 === 0){
                                 newDivBox =  document.createElement("div");
                                 newDivBox.setAttribute("id", `gif-box-${gifCount}`);
+                                newDivBox.setAttribute("class", `gif-box`);
                                 gifArea.appendChild(newDivBox);                            
                             };
                             divBox0 = document.getElementById("gif-box-0");
@@ -141,9 +144,30 @@ let initializSearch = function(){
                             }
                             else if (gifCount < 24){
                                 divBox20.appendChild(newDiv);
+                            };
+                            let gifTags = document.getElementsByClassName("gif");
+                            console.log(`number of gif: ${gifTags.length}`)
+                            for( i=0; i < gifTags.length; i++){
+                                gifTags[i].addEventListener("click", function(){
+                                    console.log("GIF clicked")
+                                    let state = this.getAttribute("data-state");
+                                    let still = this.getAttribute("data-still");
+                                    let animate = this.getAttribute("data-animate");
+                                    if(state === "animate"){
+                                        console.log("animate")
+                                        this.setAttribute("src",still);
+                                        this.setAttribute("data-state", "still")
+                                                                                                                
+                                    }
+                                    else{
+                                        console.log("still")
+                                        this.setAttribute("src",animate);
+                                        this.setAttribute("data-state", "animate")
+                                    };
+                                })
                             }
                             gifCount++;
-                            gifPauser();
+                            gifPauser()
                         }
                     }
                 })
@@ -152,7 +176,7 @@ let initializSearch = function(){
         }
         
     }
- 
+    ;
 
     // <section id="button-area"></section>
     // <section id="gif-area"></section>

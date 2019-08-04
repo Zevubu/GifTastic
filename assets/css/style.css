@@ -1,5 +1,37 @@
 body{
-    background-color: aqua;
+    background-color: rgb(141, 250, 250);
+}
+img{
+    max-width: 300px;
+}
+#biggest-box{
+    margin: 5%;
+}
+#button-area, #special-button-area{
+    margin: 1%;
+}
+
+header{
+     background-color: rgb(193, 246, 246);
+    padding: 10px;
+    margin: 0 auto;
+    border-bottom: 2px solid black;
+}
+#head-text-area{
+    text-align: center;
+   
+}
+#head-text{
+    font-size: 45px;
+}
+#select-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 20px;
+}
+.select-text{
+    font-size: 18px;
 }
 #gif-area{
     display: flex;
@@ -11,8 +43,86 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
     
+}
+.gif-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+.newGif{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+#gif-form{
+    margin-top: 20px;
+}
+
+
+
+@media screen and (max-width:1300px){
+    header{
+        background-color: rgb(193, 246, 246);
+        padding: 2%;
+        margin: 0 auto;
+        border-bottom: 2px solid black;
+    }
+    #biggest-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 5%;
+    }
+    #head-text-area{
+       text-align: center;
+      
+    }
+    #head-text{
+       font-size: 30px;
+    }
+
+    .select-text{
+       font-size: 18px;
+    }
+  
+    #big-box{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+
+    }
+    #inner-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-content: center;
+    }
+
+
+    #select-box{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .select-text{
+        font-size: 18px;
+    }
+    #gif-area{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    #gif-box-0, #gif-box-4, #gif-box-8, #gif-box-12, #gif-box-16, #gif-box-20{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        
+    }
 }
 /* .gif-pause:active{
 
