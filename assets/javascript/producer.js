@@ -15,6 +15,7 @@ window.onload = function (){
     let newDivBox;
     let newDiv;
     let newGif;
+    let boxTest;
     let divBox0;
     let divBox4;
     let divBox8;
@@ -102,43 +103,161 @@ let initializSearch = function(){
                         });
                         newDiv.appendChild(newGif);
                         if (gifCount < gifNum){
+                            if(gifCount < 4){
+                                boxTest = document.getElementById(`big-box-0`)
+                                if(!boxTest){
+                                newBigBox =  document.createElement("div");
+                                newBigBox.setAttribute("id", `big-box-0`);
+                                newBigBox.setAttribute("class", `big-box`);
+                                gifArea.appendChild(newBigBox);
+                                }
+                                if(gifCount === 0){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-2`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);
+                                }
+                                else if(gifCount === 2){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-4`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);                            
+                                };
+                            }
+                            else if(gifCount < 8){
+                                boxTest = document.getElementById(`big-box-1`)
+                                if(!boxTest){
+                                    newBigBox =  document.createElement("div");
+                                    newBigBox.setAttribute("id", `big-box-1`);
+                                    newBigBox.setAttribute("class", `big-box`);
+                                    gifArea.appendChild(newBigBox);
+                                }
+                                if(gifCount === 4){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-6`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);
+                                }
+                                else if(gifCount === 6){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-8`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);                            
+                                };
+                            }
+                            else if(gifCount < 12){
+                                boxTest = document.getElementById(`big-box-2`)
+                                if(!boxTest){
+                                    newBigBox =  document.createElement("div");
+                                    newBigBox.setAttribute("id", `big-box-2`);
+                                    newBigBox.setAttribute("class", `big-box`);
+                                    gifArea.appendChild(newBigBox);
+                                }
+                                if(gifCount === 8){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-10`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);
+                                }
+                                else if(gifCount === 10){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-12`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);                            
+                                };
+                            }
+                            else if(gifCount < 16){
+                                boxTest = document.getElementById(`big-box-3`)
+                                if(!boxTest){
+                                    newBigBox =  document.createElement("div");
+                                    newBigBox.setAttribute("id", `big-box-3`);
+                                    newBigBox.setAttribute("class", `big-box`);
+                                    gifArea.appendChild(newBigBox);
+                                }
+                                if(gifCount === 12){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-14`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);
+                                }
+                                else if(gifCount === 14){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-16`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);                            
+                                };
+                            }
+                            else if(gifCount < 20){
+                                boxTest = document.getElementById(`big-box-4`)
+                                if(!boxTest){
+                                    newBigBox =  document.createElement("div");
+                                    newBigBox.setAttribute("id", `big-box-4`);
+                                    newBigBox.setAttribute("class", `big-box`);
+                                    gifArea.appendChild(newBigBox);
+                                }
+                                if(gifCount === 16){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-18`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);
+                                }
+                                else if(gifCount === 18){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-20`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);                            
+                                };
+                            }
+                            else if(gifCount < 24){
+                                boxTest = document.getElementById(`big-box-5`)
+                                if(!boxTest){
+                                    newBigBox =  document.createElement("div");
+                                    newBigBox.setAttribute("id", `big-box-5`);
+                                    newBigBox.setAttribute("class", `big-box`);
+                                    gifArea.appendChild(newBigBox);
+                                }
+                                if(gifCount === 20){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-22`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);
+                                }
+                                else if(gifCount === 22){
+                                    newDivBox =  document.createElement("div");
+                                    newDivBox.setAttribute("id", `gif-box-24`);
+                                    newDivBox.setAttribute("class", `gif-box`);
+                                    newBigBox.appendChild(newDivBox);                            
+                                };
+                            }
+                            newDivBox.appendChild(newDiv)
 
-                            if(gifCount === 0){
-                                newDivBox =  document.createElement("div");
-                                newDivBox.setAttribute("id", `gif-box-0`);
-                                newDivBox.setAttribute("class", `gif-box`);
-                                gifArea.appendChild(newDivBox);
-                            }
-                            else if(gifCount%4 === 0){
-                                newDivBox =  document.createElement("div");
-                                newDivBox.setAttribute("id", `gif-box-${gifCount}`);
-                                newDivBox.setAttribute("class", `gif-box`);
-                                gifArea.appendChild(newDivBox);                            
-                            };
-                            divBox0 = document.getElementById("gif-box-0");
-                            divBox4 = document.getElementById("gif-box-4");
-                            divBox8 = document.getElementById("gif-box-8");
-                            divBox12 = document.getElementById("gif-box-12");
-                            divBox16 = document.getElementById("gif-box-16");
-                            divBox20 = document.getElementById("gif-box-20");
-                            if (gifCount < 4){
-                                divBox0.appendChild(newDiv);
-                            }
-                            else if (gifCount < 8){
-                                divBox4.appendChild(newDiv);
-                            }
-                            else if (gifCount < 12){
-                                divBox8.appendChild(newDiv);
-                            }
-                            else if (gifCount < 16){
-                                divBox12.appendChild(newDiv);
-                            }
-                            else if (gifCount < 20){
-                                divBox16.appendChild(newDiv);
-                            }
-                            else if (gifCount < 24){
-                                divBox20.appendChild(newDiv);
-                            };
+
+                            
+                            // divBox0 = document.getElementById("gif-box-0");
+                            // divBox0 = document.getElementById("gif-box-2");
+                            // divBox4 = document.getElementById("gif-box-4");
+                            // divBox8 = document.getElementById("gif-box-8");
+                            // divBox12 = document.getElementById("gif-box-12");
+                            // divBox16 = document.getElementById("gif-box-16");
+                            // divBox20 = document.getElementById("gif-box-20");
+                            // if (gifCount < 4){
+                            //     );
+                            // }
+                            // else if (gifCount < 8){
+                            //     divBox4.appendChild(newDiv);
+                            // }
+                            // else if (gifCount < 12){
+                            //     divBox8.appendChild(newDiv);
+                            // }
+                            // else if (gifCount < 16){
+                            //     divBox12.appendChild(newDiv);
+                            // }
+                            // else if (gifCount < 20){
+                            //     divBox16.appendChild(newDiv);
+                            // }
+                            // else if (gifCount < 24){
+                            //     divBox20.appendChild(newDiv);
+                            // };
                             gifCount++; 
                             
                         };
