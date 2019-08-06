@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(173, 130, 141);
+    background-color: rgb(188, 211, 218);
 }
 img{
     max-width: 300px;
@@ -13,10 +13,11 @@ img{
 
 
 header{
-     background-color: rgb(139, 187, 187);
+     background-color: rgb(46, 46, 46);
     padding: 10px;
     margin: 0 auto;
     border-bottom: 2px solid black;
+    color: white;
 }
 #head-text-area{
     text-align: center;
