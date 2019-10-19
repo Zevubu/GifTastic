@@ -16,12 +16,7 @@ window.onload = function (){
     let newDiv;
     let newGif;
     let boxTest;
-    let divBox0;
-    let divBox4;
-    let divBox8;
-    let divBox12;
-    let divBox16;
-    let divBox20;
+    let GIFKEY = "r979ShgE7Av2VCM8iqG8IC87X6IZ9vmr"
 
    
     // var e = document.getElementById("elementId");
@@ -68,7 +63,7 @@ let initializSearch = function(){
                 fetch(queryURL).then(function(response){
                     return response.json()
                 }).then(function(res){
-                    // console.log(res)
+                    console.log(res)
                     result = res.data;
                     for( i = 0; i < result.length; i++){
                         
